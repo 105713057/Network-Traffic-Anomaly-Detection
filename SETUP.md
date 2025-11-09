@@ -5,9 +5,9 @@ This guide will help you quickly set up and run the Network Traffic Anomaly Dete
 ## Prerequisites Check
 
 Before starting, ensure you have:
-- ✅ Python 3.10 or later installed
-- ✅ Node.js 18+ and npm installed
-- ✅ Git installed (if cloning from repository)
+- Python 3.10 or later installed
+- Node.js 18+ and npm installed
+- Git installed (if cloning from repository)
 
 ## Step-by-Step Setup
 
@@ -16,7 +16,7 @@ Before starting, ensure you have:
 ```bash
 # If using git
 git clone <repository-url>
-cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
+cd Network-Traffic-Anomaly-Detection
 
 # Or extract the project folder if downloaded as ZIP
 ```
@@ -45,19 +45,34 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
    cd ..
    ```
 
-3. **Train the models** (if not already trained):
+3. **Download and Setup AI Models** (REQUIRED):
 
-   ```bash
-   cd cyberai
-   python train_model.py
-   cd ..
+   **Important**: The trained models are not included in the repository. You must download them separately.
+
+   **Step 1**: Download the compressed model files from the Google Drive link:
+   - [Download Models from Google Drive](https://drive.google.com/drive/folders/YOUR_DRIVE_LINK_HERE) *(Replace with your actual drive link)*
+   
+   **Step 2**: Extract the downloaded archive (ZIP file)
+   
+   **Step 3**: Place the extracted model files into the following directory:
    ```
-
-   This will create trained models in `cyberai/outputs/models/`:
+   backend/cyberai/outputs/models/
+   ```
+   
+   **Step 4**: Verify that the following files are present in `backend/cyberai/outputs/models/`:
    - `logistic_regression.pkl`
    - `knn.pkl`
    - `scaler.pkl`
    - `model_metadata.json`
+
+   **Alternative**: If you prefer to train the models yourself instead of downloading:
+   ```bash
+   cd backend/cyberai
+   python train_model_fast.py  # Fast training (10-15 minutes)
+   # OR
+   python train_model.py       # Full training (30-60 minutes)
+   cd ../..
+   ```
 
 4. **Start the backend server**:
 
@@ -100,7 +115,11 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
 ### Backend Issues
 
 **Problem**: Models not found
-- **Solution**: Run `python train_model.py` in the `cyberai` directory
+- **Solution**: 
+  - Ensure you've downloaded the models from the Google Drive link
+  - Check that models exist in `backend/cyberai/outputs/models/`
+  - Verify all required files are present: `logistic_regression.pkl`, `knn.pkl`, `scaler.pkl`, `model_metadata.json`
+  - If you prefer to train models yourself, run `python train_model.py` in `backend/cyberai/` directory
 
 **Problem**: Port 8000 already in use
 - **Solution**: Change the port in `backend/main.py` (line 256) or kill the process using port 8000
@@ -122,10 +141,10 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
 ### Data Issues
 
 **Problem**: Dataset not found
-- **Solution**: Ensure the processed datasets exist in `cyberai/data/processed/`
+- **Solution**: Ensure the processed datasets exist in `backend/cyberai/data/processed/`
 - If missing, run the data cleaning notebooks:
-  - `cyberai/notebooks/10_clean_basic.ipynb`
-  - `cyberai/notebooks/11_clean_cicids.ipynb`
+  - `backend/cyberai/notebooks/10_clean_basic.ipynb`
+  - `backend/cyberai/notebooks/11_clean_cicids.ipynb`
 
 ## Running in Production
 
@@ -146,11 +165,11 @@ npm run build
 
 ## Next Steps
 
-1. ✅ Verify both servers are running
-2. ✅ Test the API at `http://localhost:8000/docs`
-3. ✅ Test the frontend at `http://localhost:3000`
-4. ✅ Make a test prediction
-5. ✅ Explore the visualizations
+1. Verify both servers are running
+2. Test the API at `http://localhost:8000/docs`
+3. Test the frontend at `http://localhost:3000`
+4. Make a test prediction
+5. Explore the visualizations
 
 ## Need Help?
 
