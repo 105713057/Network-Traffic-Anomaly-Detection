@@ -72,31 +72,31 @@ This project is a complete full-stack web application that integrates the AI/ML 
 
 ## Key Features Implemented
 
-### ✅ Frontend Development (React.js)
-- ✅ User input form with validation mechanisms
-- ✅ Three types of data visualization charts (D3.js, Chart.js, Plotly.js)
-- ✅ User-friendly responsive interface
-- ✅ Seamless interaction with backend API
-- ✅ UI/UX principles applied (modern design, animations, responsive)
+### Frontend Development (React.js)
+- User input form with validation mechanisms
+- Three types of data visualization charts (D3.js, Chart.js, Plotly.js)
+- User-friendly responsive interface
+- Seamless interaction with backend API
+- UI/UX principles applied (modern design, animations, responsive)
 
-### ✅ Backend Development (FastAPI)
-- ✅ FastAPI server with necessary routes (GET, POST)
-- ✅ AI model integration from Assignment 2
-- ✅ API endpoints for data submission and retrieval
-- ✅ Robust error handling and exception management
+### Backend Development (FastAPI)
+- FastAPI server with necessary routes (GET, POST)
+- AI model integration from Assignment 2
+- API endpoints for data submission and retrieval
+- Robust error handling and exception management
 
-### ✅ AI Model Integration
-- ✅ Efficient execution of AI model on server
-- ✅ Data preprocessing and postprocessing logic
-- ✅ Input/output handling
+### AI Model Integration
+- Efficient execution of AI model on server
+- Data preprocessing and postprocessing logic
+- Input/output handling
 
-### ✅ Additional Features
-- ✅ Comprehensive README with setup instructions
-- ✅ Enhanced visualizations (multiple chart types)
-- ✅ Real-time updates (prediction history)
-- ✅ Custom user input (all features)
-- ✅ Error handling (comprehensive)
-- ✅ UX enhancements (animations, responsive design)
+### Additional Features
+- Comprehensive README with setup instructions
+- Enhanced visualizations (multiple chart types)
+- Real-time updates (prediction history)
+- Custom user input (all features)
+- Error handling (comprehensive)
+- UX enhancements (animations, responsive design)
 
 ## Technical Stack
 
@@ -138,33 +138,46 @@ This project is a complete full-stack web application that integrates the AI/ML 
 ## Project Structure
 
 ```
-project/
-├── cyberai/              # Original ML model (Assignment 2)
-│   ├── train_model.py   # Model training script
-│   ├── data/            # Datasets
-│   ├── notebooks/       # Jupyter notebooks
-│   └── outputs/         # Model outputs
-│       └── models/      # Trained models (generated)
+Network-Traffic-Anomaly-Detection/
 ├── backend/             # FastAPI backend
-│   ├── main.py         # FastAPI application
-│   ├── model_utils.py  # Model utilities
-│   └── preprocessing.py # Preprocessing utilities
+│   ├── cyberai/         # ML model (Assignment 2)
+│   │   ├── train_model.py      # Model training script
+│   │   ├── train_model_fast.py # Fast training script
+│   │   ├── data/                # Datasets
+│   │   ├── notebooks/           # Jupyter notebooks
+│   │   └── outputs/             # Model outputs
+│   │       └── models/          # Trained models (DOWNLOAD REQUIRED)
+│   │           ├── logistic_regression.pkl
+│   │           ├── knn.pkl
+│   │           ├── scaler.pkl
+│   │           └── model_metadata.json
+│   ├── main.py          # FastAPI application
+│   ├── model_utils.py    # Model utilities
+│   └── preprocessing.py  # Preprocessing utilities
 ├── frontend/            # React.js frontend
 │   ├── src/
 │   │   ├── components/  # React components
-│   │   └── services/   # API service
+│   │   └── services/    # API service
 │   └── package.json
 ├── README.md            # Main documentation
-├── SETUP.md            # Setup guide
-└── requirements.txt    # Python dependencies
+├── SETUP.md             # Setup guide
+├── PROJECT_SUMMARY.md   # This file
+└── requirements.txt     # Python dependencies
 ```
 
 ## How to Use
 
-1. **Train Models** (if not already done):
+1. **Download and Setup AI Models** (REQUIRED):
+   - Download the compressed model files from the Google Drive link
+   - Extract the archive and place files in `backend/cyberai/outputs/models/`
+   - Verify all required files are present: `logistic_regression.pkl`, `knn.pkl`, `scaler.pkl`, `model_metadata.json`
+   
+   **Alternative**: If you prefer to train models yourself:
    ```bash
-   cd cyberai
-   python train_model.py
+   cd backend/cyberai
+   python train_model_fast.py  # Fast training (10-15 minutes)
+   # OR
+   python train_model.py       # Full training (30-60 minutes)
    ```
 
 2. **Start Backend**:
@@ -231,5 +244,5 @@ project/
 
 ---
 
-**Status**: ✅ Complete and ready for demonstration
+**Status**: Complete and ready for demonstration
 
