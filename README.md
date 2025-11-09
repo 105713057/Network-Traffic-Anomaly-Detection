@@ -2,7 +2,7 @@
 
 A comprehensive web application for network traffic classification and anomaly detection using machine learning models. This application provides a user-friendly interface for analyzing network traffic patterns and detecting potential cyberattacks.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project implements a full-stack web application that uses AI/ML models to classify network traffic and detect anomalies. The system analyzes network data features (packet size, timing, protocol information, etc.) to distinguish normal behavior from potentially malicious activity, supporting early detection of cyberattacks and improving network security.
 
@@ -15,50 +15,81 @@ This project implements a full-stack web application that uses AI/ML models to c
 - **Comprehensive Error Handling**: Robust exception management and user-friendly error messages
 - **Model Comparison**: Compare performance metrics between different models
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project/
-├── cyberai/                          # Original ML model code (Assignment 2)
-│   ├── data/                        # Datasets
-│   │   ├── raw/                     # Raw datasets
-│   │   └── processed/               # Processed datasets
-│   ├── notebooks/                   # Jupyter notebooks
-│   ├── outputs/                     # Model outputs
-│   │   ├── models/                  # Trained models (generated)
-│   │   ├── figures/                 # Visualization figures
-│   │   └── metrics/                 # Model metrics
-│   ├── train_model.py               # Model training script
-│   └── README.md                    # Original project README
+Network-Traffic-Anomaly-Detection/
 ├── backend/                         # FastAPI backend
-│   ├── main.py                     # FastAPI application
-│   ├── model_utils.py              # Model loading and prediction utilities
-│   ├── preprocessing.py            # Data preprocessing utilities
-│   └── requirements.txt            # Python dependencies
+│   ├── cyberai/                     # ML model code (Assignment 2)
+│   │   ├── data/                    # Datasets
+│   │   │   ├── raw/                 # Raw datasets
+│   │   │   └── processed/           # Processed datasets
+│   │   ├── notebooks/               # Jupyter notebooks
+│   │   ├── outputs/                 # Model outputs
+│   │   │   ├── models/              # Trained models (DOWNLOAD REQUIRED)
+│   │   │   │   ├── logistic_regression.pkl
+│   │   │   │   ├── knn.pkl
+│   │   │   │   ├── scaler.pkl
+│   │   │   │   └── model_metadata.json
+│   │   │   ├── figures/             # Visualization figures
+│   │   │   └── metrics/             # Model metrics
+│   │   ├── train_model.py           # Model training script
+│   │   └── train_model_fast.py      # Fast training script
+│   ├── main.py                      # FastAPI application
+│   ├── model_utils.py               # Model loading and prediction utilities
+│   ├── preprocessing.py             # Data preprocessing utilities
+│   └── requirements.txt             # Python dependencies
 ├── frontend/                        # React.js frontend
 │   ├── src/
-│   │   ├── components/             # React components
-│   │   │   ├── charts/            # Chart components (Chart.js, Plotly.js, D3.js)
+│   │   ├── components/              # React components
+│   │   │   ├── charts/              # Chart components (Chart.js, Plotly.js, D3.js)
 │   │   │   ├── PredictionForm.jsx
 │   │   │   ├── PredictionResult.jsx
 │   │   │   ├── Visualizations.jsx
 │   │   │   └── ModelInfo.jsx
-│   │   ├── services/              # API service
+│   │   ├── services/                # API service
 │   │   │   └── api.js
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── package.json
 │   └── vite.config.js
-└── README.md                        # This file
+├── requirements.txt                 # Root Python dependencies
+├── README.md                        # This file
+├── SETUP.md                         # Setup guide
+└── PROJECT_SUMMARY.md               # Project summary
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - **Python 3.10+** (for backend)
 - **Node.js 18+** and **npm** (for frontend)
 - **Virtual environment** (recommended for Python)
+- **Downloaded AI models** (see Backend Setup section below)
+
+### Necessary Libraries
+
+#### Backend Libraries (Python)
+- **FastAPI** (>=0.104.1) - Web framework for building APIs
+- **Uvicorn** (>=0.24.0) - ASGI server for FastAPI
+- **Pydantic** (>=2.6.0) - Data validation using Python type annotations
+- **NumPy** (>=1.26.0) - Numerical computing
+- **Pandas** (>=2.1.0) - Data manipulation and analysis
+- **scikit-learn** (>=1.3.2) - Machine learning library
+- **Joblib** (>=1.3.2) - Model serialization and loading
+- **Matplotlib** (>=3.8.0) - Plotting library
+
+#### Frontend Libraries (Node.js)
+- **React** (^18.2.0) - UI framework
+- **React DOM** (^18.2.0) - React rendering
+- **Axios** (^1.6.2) - HTTP client for API calls
+- **Chart.js** (^4.4.0) - Charting library
+- **react-chartjs-2** (^5.2.0) - React wrapper for Chart.js
+- **Plotly.js** (^2.26.0) - Interactive plotting library
+- **react-plotly.js** (^2.6.0) - React wrapper for Plotly.js
+- **D3.js** (^7.8.5) - Data visualization library
+- **Vite** (^5.0.8) - Build tool and dev server
 
 ### Installation
 
@@ -66,7 +97,7 @@ CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project/
 
 ```bash
 git clone <repository-url>
-cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
+cd Network-Traffic-Anomaly-Detection
 ```
 
 #### 2. Backend Setup
@@ -86,36 +117,45 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
 2. **Install Python dependencies**:
 
    ```bash
+   pip install -r requirements.txt
+   # Or install backend dependencies separately
    cd backend
    pip install -r requirements.txt
+   cd ..
    ```
 
-3. **Train the models** (if not already trained):
+3. **Download and Setup AI Models** (REQUIRED):
 
-   **Option A: Fast Training (Recommended - 10-15 minutes)** ⚡
-   ```bash
-   cd cyberai
-   python train_model_fast.py
+   **Important**: The trained models are not included in the repository due to file size limitations. You must download them separately.
+
+   **Step 1**: Download the compressed model files from the Google Drive link:
+   - [Download Models from Google Drive](https://drive.google.com/drive/folders/YOUR_DRIVE_LINK_HERE) *(Replace with your actual drive link)*
+   
+   **Step 2**: Extract the downloaded archive (ZIP file)
+   
+   **Step 3**: Place the extracted model files into the following directory:
    ```
-   Uses a sample of the data for faster training. Perfect for laptops without GPU.
-
-   **Option B: Full Training (30-60 minutes)** 🕐
-   ```bash
-   cd cyberai
-   python train_model.py
+   backend/cyberai/outputs/models/
    ```
-   Trains on the full dataset for maximum accuracy.
-
-   This will generate the trained models in `cyberai/outputs/models/`:
+   
+   **Step 4**: Verify that the following files are present in `backend/cyberai/outputs/models/`:
    - `logistic_regression.pkl`
    - `knn.pkl`
    - `scaler.pkl`
    - `model_metadata.json`
 
+   **Note**: If you prefer to train the models yourself instead of downloading, you can run:
+   ```bash
+   cd backend/cyberai
+   python train_model_fast.py  # Fast training (10-15 minutes)
+   # OR
+   python train_model.py       # Full training (30-60 minutes)
+   ```
+
 4. **Start the FastAPI server**:
 
    ```bash
-   cd ../backend
+   cd backend
    python main.py
    ```
 
@@ -140,7 +180,7 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
 
    The frontend will be available at `http://localhost:3000`
 
-## 📖 Usage
+## Usage
 
 ### Using the Web Application
 
@@ -194,7 +234,7 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
   }
   ```
 
-## 🎨 Features in Detail
+## Features in Detail
 
 ### Frontend Features
 
@@ -236,7 +276,7 @@ cd CYBERAI-Network-Traffic-Classification-for-Anomaly-Detection-project
    - Missing value handling
    - Type checking and conversion
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -246,14 +286,33 @@ Create a `.env` file in the `frontend` directory (optional):
 VITE_API_URL=http://localhost:8000
 ```
 
-### Model Configuration
+### AI Model Integration Configuration
 
-Model parameters can be adjusted in `cyberai/train_model.py`:
+#### Model Location
+The backend automatically loads models from:
+```
+backend/cyberai/outputs/models/
+```
+
+#### Model Files Required
+- `logistic_regression.pkl` - Logistic Regression trained model
+- `knn.pkl` - K-Nearest Neighbors trained model
+- `scaler.pkl` - Feature scaler for preprocessing
+- `model_metadata.json` - Model metadata and feature information
+
+#### Downloading Models
+1. Download the compressed model archive from the provided Google Drive link
+2. Extract the archive
+3. Copy all `.pkl` files and `model_metadata.json` to `backend/cyberai/outputs/models/`
+4. Ensure the backend can access these files (check file permissions)
+
+#### Model Configuration
+If training models yourself, parameters can be adjusted in `backend/cyberai/train_model.py`:
 - KNN k values: `[3, 5, 7]`
 - Train/test split: `test_size=0.2`
 - Random state: `random_state=42`
 
-## 📊 Model Performance
+## Model Performance
 
 The trained models achieve the following performance:
 
@@ -271,7 +330,7 @@ The trained models achieve the following performance:
 
 *Note: Performance may vary based on the dataset used for training.*
 
-## 🛠️ Development
+## Development
 
 ### Running Tests
 
@@ -303,19 +362,21 @@ cd backend
 uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
-## 📝 API Documentation
+## API Documentation
 
 Full API documentation is available at:
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
 1. **Models not found**:
-   - Ensure you've run `train_model.py` to generate models
-   - Check that models exist in `cyberai/outputs/models/`
+   - Ensure you've downloaded the models from the Google Drive link
+   - Check that models exist in `backend/cyberai/outputs/models/`
+   - Verify all required files are present: `logistic_regression.pkl`, `knn.pkl`, `scaler.pkl`, `model_metadata.json`
+   - If you prefer to train models yourself, run `python train_model.py` in `backend/cyberai/` directory
 
 2. **CORS errors**:
    - Verify CORS settings in `backend/main.py`
@@ -329,20 +390,20 @@ Full API documentation is available at:
    - Change port in `backend/main.py` or `frontend/vite.config.js`
    - Kill the process using the port
 
-## 🤝 Contributing
+## Contributing
 
 This is an assignment project. For questions or issues, please contact the project maintainers.
 
-## 📄 License
+## License
 
 This project is for educational purposes as part of Assignment 3.
 
-## 👥 Authors
+## Authors
 
 - Original ML Model: Assignment 2 Team
 - Web Application: Assignment 3 Implementation
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - CICIDS2017 dataset for network traffic data
 - scikit-learn for machine learning models
