@@ -1,0 +1,30 @@
+.plotly-container {
+  width: 100%;
+}
+
+.plotly-container .chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px;
+  overflow: visible;
+}
+
+.plotly-container .chart-wrapper > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Fix Plotly chart alignment */
+.plotly-container .js-plotly-plot {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Ensure pie chart is centered */
+.plotly-container .chart-item:has([data-type="pie"]) .chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

@@ -1,0 +1,1 @@
+{"kmeans":{"k":3,"silhouette":0.2785148006},"dbscan":{"eps":1.3089864534,"min_samples":5,"silhouette":0.0863176529,"noise_points":2030}}
